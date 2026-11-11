@@ -1,0 +1,18 @@
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editors
+.vscode/
+.idea/
+*.swp
+
+# Dependencies and logs (in case you add tooling later)
+node_modules/
+npm-debug.log*
+
+# Secrets: never commit API keys
+.env
+.env.*
+*.key

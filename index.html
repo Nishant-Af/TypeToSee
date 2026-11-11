@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TypeToSee — Interactive Search Mosaic</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+
+<body>
+
+  <!-- Background Mosaic Viewport -->
+  <div class="mosaic-viewport" id="mosaicViewport">
+    <div class="mosaic-grid" id="mosaicGrid" aria-live="polite"></div>
+  </div>
+  <div class="mosaic-vignette"></div>
+
+  <!-- Central Search Stage -->
+  <main class="center-stage">
+    <div class="search-card">
+      <div class="brand-badge">
+        <span class="brand-dot"></span>
+        <span>TypeToSee</span>
+        <span class="tile-counter" id="tileCounter">• 15 tiles</span>
+      </div>
+
+      <div class="search-pill" id="searchPill">
+        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <div class="search-spinner" id="searchSpinner" aria-hidden="true"></div>
+        <input type="text" id="searchInput" class="search-input"
+          placeholder="Type to see (e.g. nature, cyberpunk, architecture)..." autocomplete="off" spellcheck="false"
+          aria-label="Search images" />
+        <span class="shortcut-hint" id="shortcutHint" title="Press '/' to focus">/</span>
+        <button type="button" class="clear-btn" id="clearBtn" aria-label="Clear search">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+            stroke-linecap="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+
+      <div class="chips-row" id="chipsRow" role="group" aria-label="Suggested themes">
+        <button type="button" class="chip" data-query="nature">🌿 Nature</button>
+        <button type="button" class="chip" data-query="space">✨ Space</button>
+        <button type="button" class="chip" data-query="cars">🏎️ Cars</button>
+        <button type="button" class="chip" data-query="anime">🎌 Anime</button>
+        <button type="button" class="chip" data-query="food">🍜 Food</button>
+        <button type="button" class="chip" data-query="city">🌆 City</button>
+        <button type="button" class="chip" data-query="cyberpunk">⚡ Cyberpunk</button>
+      </div>
+
+      <div class="status-banner">
+        <div class="status-pill" id="statusPill" role="status"></div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Connect API Button -->
+  <button type="button" class="connect-api-btn" id="openApiModalBtn" aria-label="Connect API Key">
+    <span class="connect-api-dot" id="apiDot"></span>
+    <span id="apiBtnLabel">Connect API</span>
+  </button>
+
+  <!-- API Modal Dialog -->
+  <div class="modal-overlay" id="apiModal" role="dialog" aria-modal="true">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 class="modal-title">Connect Image Provider API</h3>
+        <button type="button" class="modal-close" id="closeApiModalBtn">&times;</button>
+      </div>
+      <p class="modal-desc">
+        TypeToSee works completely out of the box with curated fallback collections. Connect your own Unsplash or Pexels
+        API key for live search queries.
+      </p>
+      <div class="form-group">
+        <label class="form-label" for="providerSelect">API Provider</label>
+        <select id="providerSelect" class="form-input">
+          <option value="unsplash">Unsplash API</option>
+          <option value="pexels">Pexels API</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="apiKeyInput">API Access Key / Token</label>
+        <input type="password" id="apiKeyInput" class="form-input" placeholder="Paste your API key here..."
+          autocomplete="off" />
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn-secondary" id="clearApiBtn">Remove Key</button>
+        <button type="button" class="btn-primary" id="saveApiBtn">Save & Connect</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Lightbox Modal -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true">
+    <div class="lightbox-content">
+      <button type="button" class="lightbox-close" id="lightboxClose">&times;</button>
+      <img src="" alt="" class="lightbox-img" id="lightboxImg" />
+      <div class="lightbox-meta">
+        <span class="lightbox-author" id="lightboxAuthor">Photo</span>
+        <a href="#" target="_blank" rel="noopener noreferrer" class="lightbox-link" id="lightboxLink">View Original
+          ↗</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/collections.js"></script>
+  <script src="js/app.js"></script>
+</body>
+
+</html>
